@@ -1,0 +1,35 @@
+<% form_for :merge , :url=>{:controller=>"importtables", :action=>"merge", :id=> @import_table }, :html => { :multipart => true } do |f| -%>
+
+<%= f.submit "Create Transactions", :disable_with => 'Creating Transactions...' %>
+
+<table class="standard_row">
+  <thead>
+    <th>Include</th>
+    <% 0.upto(@column_index_max) do |column_index| %>
+	  <th>
+	    <%= f.select(column_index, ImportTable::TRANSACTION_IMPORT_COLUMNS, :prompt => "Select") %>
+	  </th>
+	<% end %>
+  </thead>
+    
+  <tbody>
+    <% 0.upto(@row_index_max) do |row_index| %>
+      <% row = @import_cells.select { |cell| cell.row_index == row_index } %>
+      
+      <tr>
+		<% test = row.select { |cell| cell.column_index == 1 }[0].id %>
+		<% if row.select { |cell| cell.column_index == 1 }[0].contents then %>
+			<% date_present = true %>
+		<% end %>
+		  <td><%= f.check_box(test, :checked => true) %></td>	
+        <% 0.upto(@column_index_max) do |column_index| %>
+          <td>
+            <%= row.select { |cell| cell.column_index == column_index }[0].contents %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% end %>

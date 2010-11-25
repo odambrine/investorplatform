@@ -1,0 +1,8 @@
+<% unless @cashflows.empty? %>
+	<table class="standard_row">
+	    <thead><th> Date</th><th>Amount</th><th> </th></thead>
+		<tbody><%= render :partial => 'cashflow', :collection => @cashflows %></tbody>
+	</table>
+	<%= will_paginate @cashflows %>
+<% end %>
+

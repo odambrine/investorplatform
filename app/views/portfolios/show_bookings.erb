@@ -1,0 +1,14 @@
+<h2>Portfolio: <%= h @portfolio.name %></h2>
+<table class="front">
+	<tr>
+		<td class="main">
+			<h2 class="booking">Bookings:</h2>
+			<%= render 'portfolios/bookings' %>
+		</td>
+		<td class="sidebar round">
+			<%= render 'pages/user_info' %>
+			
+		</td>
+	</tr>
+  	
+  </table>

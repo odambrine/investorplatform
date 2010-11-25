@@ -6,5 +6,18 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
+  filter_parameter_logging :password
+  
+  include SessionsHelper
+  
+  def find_or_create_security(ticker)
+    logger.info("finding or creating security #{ticker}")
+    security = Security.find_by_ticker(ticker)
+    
+    if not security 
+      security = Security.create(:ticker => ticker)
+    end 
+    return security
+  end
+  
 end

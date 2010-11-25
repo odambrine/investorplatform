@@ -1,0 +1,8 @@
+<% unless @holdings.empty? %>
+	<table class="standard_row">
+		<thead><th>Username</th><th>Admin</th><th>Created_at</th><th> </th></thead>
+		<tbody><%= render :partial => 'holding', :collection => @holdings %></tbody>
+	</table>
+	<%= will_paginate @holdings %>
+<% end %>
+

@@ -1,0 +1,7 @@
+<% unless @bookings.empty? %>
+	<table class="standard_row">
+	  <thead><th> Date</th><th>Security_id</th><th>Quantity</th><th>Expiry date</th><th>Buy Price</th><th>Sell Price</th><th>Cost</th><th>Dividend</th></thead>
+	  <tbody><%= render :partial => 'booking', :collection => @bookings %></tbody>
+	</table>
+	<%= will_paginate @bookings %>
+<% end %>

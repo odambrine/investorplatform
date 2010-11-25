@@ -1,0 +1,5 @@
+<% form_for :upload, :url=>{:controller=>"csv", :action=>"upload", :id=> @portfolio }, :html => { :multipart => true } do |f| -%>
+  <%= f.file_field :csv %>
+  <%= f.submit "Upload", :disable_with => 'Uploading...' %>
+
+<% end -%>

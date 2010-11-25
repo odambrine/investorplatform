@@ -1,0 +1,27 @@
+<% form_for @portfolio do |f| %>
+  <%= f.error_messages %>
+ 
+	  <div class="span-6">
+	  	<%= f.label :name %><br />
+	    <%= f.text_field :name %>
+	  </div>
+	
+   	  <div  class="span-3">
+	  	<%= f.label :admin %><br />
+	    <%= f.check_box :admin %>
+	  </div>
+	
+	  <div  class="span-3">
+	  	<%= f.label :show_in_graph %><br />
+	    <%= f.check_box :show_in_graph %>
+	  </div>
+	
+   	  <div  class="span-3">
+	  	<%= f.label :benchmark %><br />
+	    <%= f.select :benchmark, Security::BENCHMARKS %>
+      </div>
+
+  <div class="actions">
+  	<%= f.submit "Submit" %>
+  </div>
+<% end %>

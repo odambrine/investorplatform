@@ -1,0 +1,7 @@
+<% unless @portfolios.empty? %>
+	<table class="standard_row">
+	  <thead><th>name</th><th> </th><th> </th><th> </th><th> </th><th> </th><th> </th></thead>
+	  <tbody><%= render :partial => 'portfolio', :collection => @portfolios %></tbody>
+	</table>
+	<%= will_paginate @portfolios %>
+<% end %>

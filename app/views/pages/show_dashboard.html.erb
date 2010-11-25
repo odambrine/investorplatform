@@ -1,0 +1,41 @@
+<%= inline_annotated_timeline @data, :width => 700, :height => 300 %>
+
+
+dashboard1
+
+	<!-- Specify the size of the Container element explicitly! -->
+	<div id='chart' class='span-25' style='height: 500px;'></div>
+	<%= @chart.render('chart') %>
+
+</br>
+
+dashboard2
+
+<!-- Specify the size of the Container element explicitly! -->
+<div id='chart2' class='span-25' style='height: 300px;'></div>
+<%= @chart2.render('chart2') %>
+
+
+
+	<h1>Performance</h1>
+
+	<table>
+	  <tr>
+	    <th>Date</th>
+		<th>Invested</th>
+	    <th>Profit</th>
+		<th>Cash</th>
+	    <th>Cash_tracker_profit</th>
+	  </tr>
+
+	<% @profits.each do |profit| %>
+	  <tr>
+	    <td><%=h profit.date %></td>
+		<td><%=h profit.invested %></td>
+	    <td><%=h profit.profit %></td> 
+		<td><%=h profit.cash %></td>
+	    <td><%=h profit.cash_tracker_profit %></td> 
+
+	  </tr>
+	<% end %>
+	</table>

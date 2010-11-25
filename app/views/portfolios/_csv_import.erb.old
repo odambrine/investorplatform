@@ -1,0 +1,20 @@
+<% form_for :dump, :url=>{:controller=>"portfolios", :action=>"csv_import", :id=> @portfolio }, :html => { :multipart => true } do |f| -%>
+ <table">
+   <tr>
+     <td class="span-5">
+      <label for="dump_file">
+        Select a CSV File :
+      </label>
+     </td>
+     <td class="span-8">
+       <%= f.file_field :file -%>
+     </td>
+   
+     <td class="span-5">
+       <%= submit_tag 'Submit' -%>
+     </td>
+   
+ </table>
+
+<% end -%>
+

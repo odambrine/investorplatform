@@ -1,0 +1,16 @@
+<tr>
+	
+	
+		
+	<td><%= h holding.user.name %></td>
+	<td><%= h holding.admin %></td>
+	<td>
+		Created <%= time_ago_in_words(holding.created_at) %> ago
+	</td>
+	
+	<td>
+		<%= link_to "delete", holding, :method => :delete, :confirm => "You sure?" %>
+	</td>
+	
+	
+</tr>

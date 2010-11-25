@@ -1,0 +1,7 @@
+<% unless @transactions.empty? %>
+	<table class="standard_row">
+		<thead><th> Date</th><th>Security_id</th><th>Operation</th><th>Quantity</th><th>Price</th><th>Cost</th><th> </th></thead>
+		<tbody><%= render :partial => 'transaction', :collection => @transactions %></tbody>
+	</table>
+	<%= will_paginate @transactions %>
+<% end %>

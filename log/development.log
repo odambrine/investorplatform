@@ -20,3 +20,192 @@ Rendering rescues/layout (internal_server_error)
 Processing SayController#hello (for 127.0.0.1 at 2010-11-25 16:32:37) [GET]
 Rendering say/hello
 Completed in 7ms (View: 6, DB: 0) | 200 OK [http://localhost/say/hello]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-11-25 19:14:40) [GET]
+  Parameters: {"action"=>"home", "controller"=>"pages"}
+  [4;36;1mUser Load (2.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."remember_token" = 'd35a8506ba7aed67b813fc14f32710bd47c94695f2dac984f6d97d5dc5bd9cb3') LIMIT 1[0m
+  [4;35;1mMicropost Load (1.6ms)[0m   [0mSELECT * FROM "microposts" WHERE (user_id = 101) ORDER BY created_at DESC[0m
+
+NoMethodError (undefined method `paginate' for #<Array:0x104231518>):
+  app/controllers/pages_controller.rb:6:in `home'
+
+Rendered rescues/_trace (86.4ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-11-25 19:18:40) [GET]
+  Parameters: {"action"=>"home", "controller"=>"pages"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."remember_token" = 'd35a8506ba7aed67b813fc14f32710bd47c94695f2dac984f6d97d5dc5bd9cb3') LIMIT 1[0m
+  [4;35;1mMicropost Load (0.4ms)[0m   [0mSELECT * FROM "microposts" WHERE (user_id = 101) ORDER BY created_at DESC[0m
+Rendering template within layouts/application
+Rendering pages/home
+Rendered pages/_micropost_form (9.4ms)
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 101) [0m
+Rendered pages/_feed_item (66.5ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 101) [0m
+Rendered pages/_feed_item (3.0ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 101) [0m
+Rendered pages/_feed_item (2.6ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 101) [0m
+Rendered pages/_feed_item (2.8ms)
+Rendered pages/_feed (80.2ms)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "microposts" WHERE ("microposts".user_id = 101) [0m
+Rendered pages/_user_info (59.8ms)
+Rendered layouts/_scripts (2.4ms)
+Rendered layouts/_stylesheets (1.3ms)
+Rendered layouts/_header (4.3ms)
+Rendered layouts/_footer (1.1ms)
+Completed in 213ms (View: 192, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing PagesController#show_portfolios (for 127.0.0.1 at 2010-11-25 19:18:45) [GET]
+  Parameters: {"action"=>"show_portfolios", "id"=>"101", "controller"=>"pages"}
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."remember_token" = 'd35a8506ba7aed67b813fc14f32710bd47c94695f2dac984f6d97d5dc5bd9cb3') LIMIT 1[0m
+  [4;36;1mPortfolio Load (5.0ms)[0m   [0;1mSELECT DISTINCT "portfolios".* FROM "portfolios" INNER JOIN "holdings" ON "portfolios".id = "holdings".portfolio_id WHERE (("holdings".user_id = 101)) LIMIT 30 OFFSET 0[0m
+Rendering template within layouts/application
+Rendering pages/show_portfolios
+Rendered pages/_portfolio_form (187.6ms)
+Rendered pages/_portfolio (5.0ms)
+Rendered pages/_portfolios (8.8ms)
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "microposts" WHERE ("microposts".user_id = 101) [0m
+Rendered pages/_user_info (5.2ms)
+Rendered layouts/_scripts (1.4ms)
+Rendered layouts/_stylesheets (0.4ms)
+Rendered layouts/_header (2.6ms)
+Rendered layouts/_footer (0.2ms)
+Completed in 308ms (View: 218, DB: 5) | 200 OK [http://localhost/pages/show_portfolios/101]
+
+
+Processing PagesController#show_dashboard (for 127.0.0.1 at 2010-11-25 19:18:48) [GET]
+  Parameters: {"action"=>"show_dashboard", "id"=>"101", "controller"=>"pages"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."remember_token" = 'd35a8506ba7aed67b813fc14f32710bd47c94695f2dac984f6d97d5dc5bd9cb3') LIMIT 1[0m
+  [4;35;1mPortfolio Load (0.4ms)[0m   [0mSELECT DISTINCT "portfolios".* FROM "portfolios" INNER JOIN "holdings" ON "portfolios".id = "holdings".portfolio_id WHERE (("holdings".user_id = 101)) [0m
+  [4;36;1mSecurity Load (1.3ms)[0m   [0;1mSELECT "securities".* FROM "securities" INNER JOIN "transactions" ON "securities".id = "transactions".security_id WHERE (("transactions".portfolio_id = 10)) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "transactions" WHERE ("transactions".security_id = 8) [0m
+  [4;36;1mTransaction Load (0.2ms)[0m   [0;1mSELECT * FROM "transactions" WHERE ("transactions".security_id = 8) ORDER BY date ASC LIMIT 1[0m
+  [4;35;1mQuote Load (15.3ms)[0m   [0mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2009-12-11' AND "quotes"."security_id" = 8) LIMIT 1[0m
+  [4;36;1mQuote Load (99.6ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes".security_id = 8) ORDER BY date DESC LIMIT 1[0m
+  [4;35;1mSecurity Load (0.2ms)[0m   [0mSELECT * FROM "securities" WHERE ("securities"."id" = 7) [0m
+  [4;36;1mQuote Load (2.2ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2010-11-25' AND "quotes"."security_id" = 7) LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "transactions" WHERE ("transactions".security_id = 9) [0m
+  [4;36;1mTransaction Load (0.2ms)[0m   [0;1mSELECT * FROM "transactions" WHERE ("transactions".security_id = 9) ORDER BY date ASC LIMIT 1[0m
+  [4;35;1mQuote Load (0.4ms)[0m   [0mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2010-02-24' AND "quotes"."security_id" = 9) LIMIT 1[0m
+  [4;36;1mQuote Load (2.1ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes".security_id = 9) ORDER BY date DESC LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "securities" WHERE ("securities"."id" = 7) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2010-11-25' AND "quotes"."security_id" = 7) LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "transactions" WHERE ("transactions".security_id = 10) [0m
+  [4;36;1mTransaction Load (0.2ms)[0m   [0;1mSELECT * FROM "transactions" WHERE ("transactions".security_id = 10) ORDER BY date ASC LIMIT 1[0m
+  [4;35;1mQuote Load (0.2ms)[0m   [0mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2010-02-24' AND "quotes"."security_id" = 10) LIMIT 1[0m
+  [4;36;1mQuote Load (2.2ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes".security_id = 10) ORDER BY date DESC LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "securities" WHERE ("securities"."id" = 7) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2010-11-25' AND "quotes"."security_id" = 7) LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "transactions" WHERE ("transactions".security_id = 12) [0m
+  [4;36;1mTransaction Load (0.2ms)[0m   [0;1mSELECT * FROM "transactions" WHERE ("transactions".security_id = 12) ORDER BY date ASC LIMIT 1[0m
+  [4;35;1mQuote Load (0.5ms)[0m   [0mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2010-02-24' AND "quotes"."security_id" = 12) LIMIT 1[0m
+  [4;36;1mQuote Load (2.2ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes".security_id = 12) ORDER BY date DESC LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "securities" WHERE ("securities"."id" = 7) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2010-11-25' AND "quotes"."security_id" = 7) LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "transactions" WHERE ("transactions".security_id = 16) [0m
+  [4;36;1mTransaction Load (0.2ms)[0m   [0;1mSELECT * FROM "transactions" WHERE ("transactions".security_id = 16) ORDER BY date ASC LIMIT 1[0m
+  [4;35;1mQuote Load (0.5ms)[0m   [0mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2010-02-24' AND "quotes"."security_id" = 16) LIMIT 1[0m
+  [4;36;1mQuote Load (2.1ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes".security_id = 16) ORDER BY date DESC LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "securities" WHERE ("securities"."id" = 7) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2010-11-25' AND "quotes"."security_id" = 7) LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "transactions" WHERE ("transactions".security_id = 5) [0m
+  [4;36;1mTransaction Load (0.2ms)[0m   [0;1mSELECT * FROM "transactions" WHERE ("transactions".security_id = 5) ORDER BY date ASC LIMIT 1[0m
+  [4;35;1mQuote Load (0.6ms)[0m   [0mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2009-12-11' AND "quotes"."security_id" = 5) LIMIT 1[0m
+  [4;36;1mQuote Load (2.7ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes".security_id = 5) ORDER BY date DESC LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "securities" WHERE ("securities"."id" = 7) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2010-11-25' AND "quotes"."security_id" = 7) LIMIT 1[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "transactions" WHERE ("transactions".security_id = 11) [0m
+  [4;36;1mTransaction Load (0.2ms)[0m   [0;1mSELECT * FROM "transactions" WHERE ("transactions".security_id = 11) ORDER BY date ASC LIMIT 1[0m
+  [4;35;1mQuote Load (0.7ms)[0m   [0mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2009-12-11' AND "quotes"."security_id" = 11) LIMIT 1[0m
+  [4;36;1mQuote Load (2.3ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes".security_id = 11) ORDER BY date DESC LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "securities" WHERE ("securities"."id" = 7) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2010-11-25' AND "quotes"."security_id" = 7) LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "transactions" WHERE ("transactions".security_id = 8) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "transactions" WHERE ("transactions".security_id = 8) ORDER BY date ASC LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2009-12-11' AND "quotes"."security_id" = 8) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes".security_id = 8) ORDER BY date DESC LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "securities" WHERE ("securities"."id" = 7) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2010-11-25' AND "quotes"."security_id" = 7) LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "transactions" WHERE ("transactions".security_id = 17) [0m
+  [4;36;1mTransaction Load (0.2ms)[0m   [0;1mSELECT * FROM "transactions" WHERE ("transactions".security_id = 17) ORDER BY date ASC LIMIT 1[0m
+  [4;35;1mQuote Load (0.7ms)[0m   [0mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2009-12-11' AND "quotes"."security_id" = 17) LIMIT 1[0m
+  [4;36;1mQuote Load (2.2ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes".security_id = 17) ORDER BY date DESC LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "securities" WHERE ("securities"."id" = 7) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2010-11-25' AND "quotes"."security_id" = 7) LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "transactions" WHERE ("transactions".security_id = 5) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "transactions" WHERE ("transactions".security_id = 5) ORDER BY date ASC LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2009-12-11' AND "quotes"."security_id" = 5) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes".security_id = 5) ORDER BY date DESC LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "securities" WHERE ("securities"."id" = 7) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2010-11-25' AND "quotes"."security_id" = 7) LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "transactions" WHERE ("transactions".security_id = 11) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "transactions" WHERE ("transactions".security_id = 11) ORDER BY date ASC LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2009-12-11' AND "quotes"."security_id" = 11) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes".security_id = 11) ORDER BY date DESC LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "securities" WHERE ("securities"."id" = 7) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2010-11-25' AND "quotes"."security_id" = 7) LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "transactions" WHERE ("transactions".security_id = 17) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "transactions" WHERE ("transactions".security_id = 17) ORDER BY date ASC LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2009-12-11' AND "quotes"."security_id" = 17) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes".security_id = 17) ORDER BY date DESC LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "securities" WHERE ("securities"."id" = 7) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2010-11-25' AND "quotes"."security_id" = 7) LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "transactions" WHERE ("transactions".security_id = 8) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "transactions" WHERE ("transactions".security_id = 8) ORDER BY date ASC LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2009-12-11' AND "quotes"."security_id" = 8) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes".security_id = 8) ORDER BY date DESC LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "securities" WHERE ("securities"."id" = 7) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "quotes" WHERE ("quotes"."date" = '2010-11-25' AND "quotes"."security_id" = 7) LIMIT 1[0m
+  [4;35;1mPortfolio Load (546.2ms)[0m   [0mselect date, invested, profit, cash, cash_tracker_profit from (select date, sum(invested) as invested, sum(profit) as profit, sum(cash) as cash, sum(cash_tracker_profit) as cash_tracker_profit from(Select pbb.date, sum(pbb.invested) as invested, sum(pbb.profit) as profit, sum(pbb.cash) as cash, sum(pbb.cash_tracker_profit) as cash_tracker_profit from (select q.date, b.quantity * b.buy_price as invested,CASE WHEN b.sell_price > 0 THEN (b.sell_price-b.buy_price)*b.quantity-b.cost ELSE (q.close-b.buy_price)*b.quantity-b.cost END as profit, 0 as cash, 0 as cash_tracker_profit from bookings b join portfolios pf on pf.id = b.portfolio_id join quotes q on q.security_id = b.security_id where ((q.date >= b.date and q.date < b.expiry_date) or (q.date >= b.date and length(b.expiry_date) is null))) as pbb group by pbb.date union select ctp.date, sum(invested) as invested, sum(profit) as profit, sum(cash) as cash, sum(cash_tracker_profit) as cash_tracker_profit from(select q.date, 0 as invested, 0 as profit, cf.amount as cash, (((q.close/q2.close)-1)*cf.amount) as cash_tracker_profit from cashflows cf join portfolios pf on pf.id = cf.portfolio_id join quotes q on q.security_id = pf.benchmark_id join quotes q2 on q2.security_id = pf.benchmark_id and q2.date = cf.date where q.date > cf.date) as ctp group by ctp.date) group by date) where cash_tracker_profit <> 0 [0m
+  [4;36;1mTransaction Load (1.4ms)[0m   [0;1mSELECT * FROM "transactions" WHERE ("transactions".portfolio_id = 10) ORDER BY date ASC[0m
+  [4;35;1mCashflow Load (0.2ms)[0m   [0mSELECT * FROM "cashflows" WHERE ("cashflows".portfolio_id = 10) ORDER BY date ASC[0m
+Rendering template within layouts/application
+Rendering pages/show_dashboard
+Rendered layouts/_scripts (1.4ms)
+Rendered layouts/_stylesheets (0.4ms)
+Rendered layouts/_header (2.8ms)
+Rendered layouts/_footer (0.1ms)
+Completed in 1143ms (View: 120, DB: 689) | 200 OK [http://localhost/pages/show_dashboard/101]
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-11-25 19:18:52) [GET]
+  Parameters: {"action"=>"show", "id"=>"101", "controller"=>"users"}
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 101) [0m
+  [4;35;1mMicropost Load (0.4ms)[0m   [0mSELECT * FROM "microposts" WHERE ("microposts".user_id = 101) ORDER BY created_at DESC LIMIT 30 OFFSET 0[0m
+Rendering template within layouts/application
+Rendering users/show
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "microposts" WHERE ("microposts".user_id = 101) [0m
+Rendered microposts/_micropost (1.7ms)
+Rendered microposts/_micropost (0.2ms)
+Rendered microposts/_micropost (0.2ms)
+Rendered microposts/_micropost (0.2ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "microposts" WHERE ("microposts".user_id = 101) [0m
+Rendered layouts/_scripts (1.4ms)
+Rendered layouts/_stylesheets (0.4ms)
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."remember_token" = 'd35a8506ba7aed67b813fc14f32710bd47c94695f2dac984f6d97d5dc5bd9cb3') LIMIT 1[0m
+Rendered layouts/_header (3.5ms)
+Rendered layouts/_footer (0.2ms)
+Completed in 34ms (View: 21, DB: 1) | 200 OK [http://localhost/users/101]
+
+
+Processing PagesController#show_portfolios (for 127.0.0.1 at 2010-11-25 19:19:20) [GET]
+  Parameters: {"action"=>"show_portfolios", "id"=>"101", "controller"=>"pages"}
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."remember_token" = 'd35a8506ba7aed67b813fc14f32710bd47c94695f2dac984f6d97d5dc5bd9cb3') LIMIT 1[0m
+  [4;36;1mPortfolio Load (0.3ms)[0m   [0;1mSELECT DISTINCT "portfolios".* FROM "portfolios" INNER JOIN "holdings" ON "portfolios".id = "holdings".portfolio_id WHERE (("holdings".user_id = 101)) LIMIT 30 OFFSET 0[0m
+Rendering template within layouts/application
+Rendering pages/show_portfolios
+Rendered pages/_portfolio_form (12.7ms)
+Rendered pages/_portfolio (2.9ms)
+Rendered pages/_portfolios (3.2ms)
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM "microposts" WHERE ("microposts".user_id = 101) [0m
+Rendered pages/_user_info (4.8ms)
+Rendered layouts/_scripts (1.4ms)
+Rendered layouts/_stylesheets (0.4ms)
+Rendered layouts/_header (2.5ms)
+Rendered layouts/_footer (0.1ms)
+Completed in 46ms (View: 27, DB: 1) | 200 OK [http://localhost/pages/show_portfolios/101]

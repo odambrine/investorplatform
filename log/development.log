@@ -1,0 +1,22 @@
+
+
+
+Processing SayController#index (for 127.0.0.1 at 2010-11-25 16:31:59) [GET]
+
+ActionController::UnknownAction (No action responded to index. Actions: hello):
+  
+
+Rendering rescues/layout (not_found)
+
+
+Processing SayController#hello (for 127.0.0.1 at 2010-11-25 16:32:10) [GET]
+
+ActionView::MissingTemplate (Missing template say/hello.erb in view path app/views):
+  
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SayController#hello (for 127.0.0.1 at 2010-11-25 16:32:37) [GET]
+Rendering say/hello
+Completed in 7ms (View: 6, DB: 0) | 200 OK [http://localhost/say/hello]
